@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3JZdzDREKni93kiutQ1C5UzGa/ChfjQxkko1p+Ldx6tpA6IiOQrMaMRZEbJO9jkaMnKSO0Y3dGOksoRSwMBd1w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nagam\\Downloads\\GitHub\\TravelSearchApp\\TravelSearchApplication\\TravelSearchApp\\TravelSearchApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nagam\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
+  ],
+  "logs": []
+}

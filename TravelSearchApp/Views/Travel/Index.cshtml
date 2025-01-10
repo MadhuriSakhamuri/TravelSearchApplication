@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .results-table {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Travel Search</h1>
+        <div class="form-container border rounded p-4 shadow">
+            <form method="post" action="/Travel/Index">
+                <div class="mb-3">
+                    <label for="origin" class="form-label">Origin</label>
+                    <select id="origin" name="origin" class="form-select" required>
+                        <option value="" disabled selected>Select your origin</option>
+                        <option value="JFK">New York City (JFK)</option>
+                        <option value="LAX">Los Angeles (LAX)</option>
+                        <option value="LHR">London (LHR)</option>
+                        <option value="NRT">Tokyo (NRT)</option>
+                        <option value="SYD">Sydney (SYD)</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="nights" class="form-label">Number of Nights</label>
+                    <input id="nights" name="nights" type="number" min="1" class="form-control" placeholder="Enter number of nights" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="budget" class="form-label">Budget ($)</label>
+                    <input id="budget" name="budget" type="number" min="1" class="form-control" placeholder="Enter your budget" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </form>
+        </div>
+
+        <div class="container results-table">
+            @if (ViewData["Trips"] != null && ((List<TravelSearchApp.Models.TripResult>)ViewData["Trips"]).Count > 0)
+            {
+                <h2 class="text-center mb-4">Search Results</h2>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Destination</th>
+                            <th>Flight Price ($)</th>
+                            <th>Hotel Name</th>
+                            <th>Hotel Price/Night ($)</th>
+                            <th>Total Cost ($)</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var trip in (List<TravelSearchApp.Models.TripResult>)ViewData["Trips"])
+                        {
+                            <tr>
+                                <td>@trip.Destination</td>
+                                <td>@trip.Flight.price</td>
+                                <td>@trip.Hotel.name</td>
+                                <td>@trip.Hotel.price_per_night</td>
+                                <td>@trip.TotalCost</td>
+                                <td>@trip.Score</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else if (ViewData["Trips"] != null)
+            {
+                <div class="alert alert-warning text-center mt-4" role="alert">
+                    No trips found matching your criteria.
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
